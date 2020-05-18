@@ -1,0 +1,34 @@
+﻿
+
+<div class="foter">
+    <!-- Brands -->
+    <div class="brands">
+        <h3>Brands</h3>
+        <div class="logos">
+            <img src="~/Content/images/logo1.gif" alt="" />
+            <img src="~/Content/images/logo2.gif" alt="" />
+            <img src="~/Content/images/logo3.gif" alt="" />
+            <img src="~/Content/images/logo4.gif" alt="" />
+            <img src="~/Content/images/logo5.gif" alt="" />
+        </div>
+    </div>
+    <!-- End Brands -->
+    <!-- Footer -->
+    <div id="footer">
+        <div class="left">
+            @Html.ActionLink("Trang chủ", "Index", "Home")
+            <span>|</span>
+            @Html.ActionLink("Giới thiệu", "GioiThieu", "Home")
+            <span>|</span>
+            @Html.ActionLink("Cửa hàng", "List_SanPham", "Home")
+            <span>|</span>
+            @Html.ActionLink("Tài khoản", "Login", "Admin")
+            <span>|</span>
+            @Html.ActionLink("Liên hệ", "LienHe", "Home")
+        </div>
+        <div class="right">
+            &copy; Copyright <a href="/Home/Index" target="_blank" title="CSS Templates">BestShose.com</a>
+        </div>
+    </div>
+</div>
+<!-- End Footer -->

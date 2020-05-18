@@ -1,0 +1,100 @@
+﻿@model Web_Ban_Giay_2.Models.Entities.Giay
+@using Web_Ban_Giay_2.Models.Entities;
+
+@*@model List<Web_Ban_Giay_2.Models.Entities.Giay>*@
+@{
+    ViewBag.Title = "ChiTiet_SP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content-ct">
+
+    <!-- Tabs -->
+    <!-- <div class="tabs">
+        <ul>
+            <li><a href="#" class="active"><span>Safety Shoes</span></a></li>
+            <li><a href="#"><span>Sport Shoes</span></a></li>
+            <li><a href="#" class="red"><span>More Shoes</span></a></li>
+        </ul>
+    </div> -->
+    <!-- Tabs -->
+    <!-- Container -->
+    <div id="container-ct">
+
+        <div class="tabbed-left">
+
+            <div class="items-ct">
+                <img src="~/Content/img_product/@Model.Hinhanh">
+            </div>
+            <form action="/ShoppingCart/Add" method="post">
+                <div class="ct-sp">
+                    <h2>@Model.Tengiay</h2>
+                    <p>Thương hiệu: <span style="font-weight: bold; color: #ad0e0e;">@Html.DisplayFor(model => model.NhaSanXuat.Tennhasx)</span></p>
+                    <p>Loại giày: <span style="font-weight: bold; color: #ad0e0e;">@Html.DisplayFor(model => model.LoaiGiay.Tenloaigiay)</span></p>
+                    <br />
+                    <div class="ct-color">
+                        <p>Chọn màu :</p>
+                        <select name="mau">
+                            @{
+                                foreach (var i in Model.ChiTietMaus.Select(x => x.Mau))
+                                {
+                                    <option value="@i.Tenmau">@i.Tenmau</option>
+                                }
+                            }
+
+                            @*<option>Đỏ</option>
+                    <option>Đen</option>
+                    <option>Trắng</option>*@
+                        </select>
+                    </div>
+
+                    <div class="ct-color">
+                        <p>Chọn size :</p>
+                        <select name="size">
+                            @{
+                                foreach (var i in Model.ChiTietSizes.Select(x => x.Size))
+                                {
+                                    <option value="@i.Sosize">@i.Sosize</option>
+                                }
+                            }
+
+                            @*<option>36</option>
+                    <option>37</option>
+                    <option>38</option>*@
+                        </select>
+                    </div>
+                    <br />
+
+                    <div class="amount" style="padding-top: 15px;">
+                        <input type="number" name="amount" value="1" min="1" style="float: left;">
+                        <p style="float: left;">Giá bán : <span>@Model.Giaban.GetValueOrDefault(0).ToString("N0") đ</span></p>
+                    </div>
+                    <br />
+                    <div class="buy">
+                        <div class="buy-sp">
+                            <button type="submit" formaction="/ShoppingCart/Add_Pay">Mua ngay</button>
+                        </div>
+                        <input name="id" value="@Model.Magiay" style="display: none;"/>
+                        @*button để trong form, có 2 thẻ ẩn có value là value 2 option, button có
+                sự kiện onclick = '@Url.Action("ShoppingCart", "Add", new {id=@Model.Magiay, mau=mau, size=size})' xong truyền vào controller,action,3 param của Add*@
+                        <div class="cart-sp">
+                            <button type="submit" onclick="ktra()">@*<a href="/ShoppingCart/Add/@Model.Magiay">*@Thêm vào giỏ@*</a>*@</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="decreption">
+                <h2>Mô tả sản phẩm :</h2>
+                <p style="font-size: 13px;">@Model.Mota</p>
+            </div>
+        </div>
+        <!-- End Container -->
+
+        @RenderPage("~/Views/Shared/Slogan.cshtml")
+
+    </div>
+    <!-- End Content -->
+
+</div>
+

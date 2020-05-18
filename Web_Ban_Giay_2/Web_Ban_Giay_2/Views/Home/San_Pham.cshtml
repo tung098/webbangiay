@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Web_Ban_Giay_2.Models.San_Pham>
+
+@{
+    ViewBag.Title = "San_Pham";
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+}
+
+    <div class="title-sp">
+        <h2>Sản Phẩm</h2>
+
+        <button>
+            <p>
+                @Html.ActionLink("Thêm mới", "Create_SP")
+            </p>
+        </button>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit_SP", new { id = item.id }) |
+                    @Html.ActionLink("Chi Tiết", "Details_SP", new { id = item.id }) |
+                    @Html.ActionLink("Xóa", "Delete_SP", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Web_Ban_Giay_2.Models.Entities.ChiTietMau>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+
+    int i = 0;
+}
+
+<div style="width: 81%;">
+    <div class="title-sp">
+        <h2>Chi Tiết Màu</h2>
+    </div>
+    <table class="table" style="width: 60%; margin-top: 60px;">
+        <tr style="background: #efeded;">
+            <th>
+                Tên Giày
+            </th>
+            <th>
+                Tên Màu
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Ghichu)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr style="background: none;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Giay.Tengiay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mau.Tenmau)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Ghichu)
+                    </td>*@
+                @if ( i== 1)
+                {
+                    <td>
+                           <div class="virtual">@Html.ActionLink("Thêm mới", "Create", new { id = item.MachitietMau })</div>
+                           @*@Html.ActionLink("Details", "Details", new { id = item.MachitietMau }) |*@
+                           @Html.ActionLink("Xóa", "Delete", new { id = item.MachitietMau })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.MachitietMau })
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>

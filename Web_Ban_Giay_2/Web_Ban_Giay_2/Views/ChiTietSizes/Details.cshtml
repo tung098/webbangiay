@@ -1,0 +1,43 @@
+﻿@model Web_Ban_Giay_2.Models.Entities.ChiTietSize
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChiTietSize</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Giay.Tengiay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Giay.Tengiay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size.Masize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size.Masize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ghichu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ghichu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MachitietSize }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

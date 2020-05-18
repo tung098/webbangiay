@@ -1,0 +1,107 @@
+﻿@*@model IEnumerable<Web_Ban_Giay_2.Models.Entities.DonHang>*@
+
+@model PagedList.IPagedList<Web_Ban_Giay_2.Models.Entities.DonHang>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+}
+
+    <div style="width: 81%;">
+        <div class="title-sp">
+            <h2>Đơn Hàng</h2>
+
+            @*<button>
+                <p>
+                    @Html.ActionLink("Thêm mới", "Create")
+                </p>
+            </button>*@
+        </div>
+        <table class="table">
+            <tr style="background: #efeded;">
+                <th>
+                    Mã Đơn Hàng
+                </th>
+                <th>
+                    Tên Khách Hàng
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sdt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Diachi)
+                </th>*@
+                <th>
+                    Ngày Đặt
+                </th>
+                <th>
+                    Ngày Giao
+                </th>
+                <th>
+                    Tình Trạng
+                </th>
+                <th>
+                    Thanh Toán
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Ghichu)
+                </th>*@
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                <span>#</span>@Html.DisplayFor(modelItem => item.Madh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenkh)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sdt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diachi)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngaydat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngaygiao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tinhtranggh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dathanhtoan)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Ghichu)
+            </td>*@
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.Madh }) |
+                @*@Html.ActionLink("Details", "Details", new { id = item.Madh }) |*@
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Madh })
+            </td>
+        </tr>
+            }
+
+        </table>
+        <div style="margin-left:15px; margin-bottom:40px;">
+            <!-- Thêm mã phân trang -->
+            <br />
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page }))
+            <!-- Kết thúc -->
+        </div>
+    </div>

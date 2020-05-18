@@ -1,0 +1,109 @@
+﻿@using Web_Ban_Giay_2.Models.Entities;
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Shopping_Cart cart = (Shopping_Cart)Session["cart"];
+    List<Item> lst = new List<Item>();
+    if (cart != null)
+    {
+        lst = cart.lst;
+    }
+
+    double totalMoney = cart.GetTotalMoney();
+    //double tprice = 0;
+}
+
+<div id="content-ct">
+
+    <!-- Tabs -->
+    <!-- <div class="tabs">
+        <ul>
+            <li><a href="#" class="active"><span>Safety Shoes</span></a></li>
+            <li><a href="#"><span>Sport Shoes</span></a></li>
+            <li><a href="#" class="red"><span>More Shoes</span></a></li>
+        </ul>
+    </div> -->
+    <!-- Tabs -->
+    <!-- Container -->
+    <div id="container-ct">
+
+        <div class="tabbed-left-contact">
+            <form action="/Home/ThanhToan" method="post" onsubmit="return check()" name="fDK">
+                <div class="left-checkout">
+                    <h2>Thanh Toán</h2>
+                    <h3>Thông tin khách hàng :</h3>
+                    <div class="tt">
+                        <p>Họ và tên *  </p><input placeholder="VD: Nguyễn Văn A" type="text" name="hoten">
+                        <span id="c-hoten"></span>
+                    </div>
+                    <div class="tt">
+                        <p>Điện thoại * </p><input placeholder="VD: 0987654321" type="text" name="sdt">
+                        <span id="c-sdt"></span>
+                    </div>
+                    <div class="tt">
+                        <p>Email *  </p><input placeholder="VD: dangchu@gmail..." type="text" name="email">
+                        <span id="c-email"></span>
+                    </div>
+                    <div class="tt">
+                        <p>Địa chỉ chi tiết * </p><textarea placeholder="VD: số 12, ngõ 210, Hoàng Quốc Việt, Cầu Giấy,  Hà Nội" name="diachi"></textarea>
+                        <span id="c-diachi"></span>
+                    </div>
+                    <p>Ghi chú </p><textarea name="ghichu" value="không"></textarea>
+                    <p>Phương thức thanh toán * : </p>
+                    <div class="pt-thanhtoan">
+                        <div>
+                            <input type="radio" name="thanhtoan" value="0" /><p>Thanh toán tại nhà</p>
+                            <input type="radio" name="thanhtoan" value="1" /><p>Chuyển khoản ngân hàng</p>
+                        </div>
+                        <div style="clear: both;"><span id="c-thanhtoan"></span></div>
+                    </div>
+                    
+                </div>
+
+                <div class="btn-checkout"><button type="submit">Đặt hàng</button></div>
+            </form>
+        </div>
+
+        <div class="tabbed-right">
+            <div class="right-checkout">
+                <h2>Thông tin giỏ hàng</h2>
+                <table style="line-height: 30px;">
+                    <tr>
+                        <td style="width: 86px; font-weight: bold;">Tên sản phẩm</td>
+                        <td style="width: 56px; font-weight: bold;">Số lượng</td>
+                        <td style="font-weight: bold;">Giá bán</td>
+                    </tr>
+
+                    @{
+                        if (lst.Count() > 0)
+                        {
+
+                            foreach (var item in lst)
+                            {
+                                //tprice = tprice + item.amount * item.price;
+                                <tr style="line-height: 16px;">
+                                    <td>@item.name</td>
+                                    <td style="text-align: center;">@item.amount</td>
+                                    <td>@item.price.ToString("N0") đ</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <p style="margin-top: 30px;">Chưa có sản phẩm nào trong giỏ hàng</p>
+                        }
+                    }
+
+                </table>
+
+                <p style="font-size: 15px; font-weight: bold; margin-top: 15px;">Tổng tiền : <span style="font-size: 20px; color: #ff6f00;">@totalMoney.ToString("N0") đ</span></p>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Content -->
+
+</div>
+

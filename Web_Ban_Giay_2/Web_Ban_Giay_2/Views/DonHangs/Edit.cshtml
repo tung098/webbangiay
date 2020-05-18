@@ -1,0 +1,144 @@
+﻿@model Web_Ban_Giay_2.Models.Entities.DonHang
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+
+    double tongtien = 0;
+}
+    <div style="margin-left: 15px; width: 79%;" >
+        <h2>Sửa Đơn Hàng</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="width: 80%;">
+        <h4>Đơn hàng</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Madh)
+
+    <div class="left-bill">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Madh, "Mã đơn hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Madh" name="Madh" value="#@Model.Madh" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tenkh, "Tên khách hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Tenkh" name="Tenkh" value="@Model.Tenkh" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Email" name="Email" value="@Model.Email" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sdt, "Số điện thoại", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Sdt" name="Sdt" value="@Model.Sdt" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diachi, "Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea style="height: 70px;" class="form-control" type="text" id="Diachi" name="Diachi" value="@Model.Diachi" readonly>@Model.Diachi</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-bill">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ngaydat, "Ngày đặt", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Ngaydat" name="Ngaydat" value="@Model.Ngaydat" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ngaygiao, "Ngày giao", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Ngaygiao" name="Ngaygiao" value="@Model.Ngaygiao" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tinhtranggh, "Tình trạng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tinhtranggh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tinhtranggh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dathanhtoan, "Thanh Toán", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" id="Dathanhtoan" name="Dathanhtoan" value="@Model.Dathanhtoan" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ghichu, "Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea style="height: 70px;" class="form-control" type="text" id="Ghichu" name="Ghichu" value="@Model.Ghichu" readonly>@Model.Ghichu</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-bill">
+        <h4 style="padding-left: 14px;">Thông tin đơn hàng</h4>
+        <table class="table" style="width: 89%; margin-top: 10px;">
+            <tr style="background: #efeded;">
+                <th>Tên sản phẩm</th>
+                <th>Màu</th>
+                <th>Size</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+
+            @foreach (var item in Model.ChiTietDonHangs)
+            {
+                var thanhtien = item.SoLuong * item.Dongia;
+                <tr>
+                    <td>@item.Giay.Tengiay</td>
+                    <td>@item.Mau</td>
+                    <td>@item.Size</td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.Dongia.GetValueOrDefault(0).ToString("N0")</td>
+                    <td>@thanhtien.GetValueOrDefault(0).ToString("N0")</td>
+                </tr>
+                tongtien = tongtien + (double)thanhtien;
+            }
+
+        </table>
+        <p class="left-tt">Tổng tiền</p>
+        <p class="right-tt">@tongtien.ToString("N0")</p>
+    </div>
+
+    <div style="clear: both;">
+        <div class="form-group create-sp">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Quay lại đơn hàng", "Index")
+        </div>
+    </div>
+    </div>
+        }
+</div>
+        
